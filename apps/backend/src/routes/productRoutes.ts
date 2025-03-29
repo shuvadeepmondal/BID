@@ -4,6 +4,7 @@ import {
   createProduct,
   getProductsByCampus,
   getMyProducts,
+  getProductById
 } from "../controllers/productController";
 import authMiddleware from "../middleware/auth";
 import validate from "../middleware/validate";
@@ -25,6 +26,8 @@ router.post(
 );
 
 router.get("/:campus", getProductsByCampus);
-router.get("/my-products", authMiddleware, getMyProducts);
+router.get("/:campus/my-products", authMiddleware, getMyProducts);
+router.get("/:campus/items/:productId", authMiddleware, getProductById);
+
 
 export default router;
