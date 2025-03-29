@@ -7,12 +7,12 @@ export function LandingHero() {
       badge={{
         text: "Build on Avalanche Network",
         action: {
-          text: "Chech it Out",
+          text: "Check it Out",
           href: "https://www.avax.network/",
         },
       }}
       title="BID - Buy, Interact and Deal"
-      description="Enjoy the freedom of selling your products from the comport of your dorms."
+      description="Enjoy the freedom of selling your products from the comfort of your dorms."
       actions={[
         {
           text: "Get Started",
