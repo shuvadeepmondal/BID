@@ -57,9 +57,13 @@ export interface Attendance {
   date: string;
 }
 
-export interface AttendanceCountData {
-  presentDays: number;
-  absentDays: number;
+export interface Product {
+  id: number
+  name: string
+  description: string
+  price: number
+  image: string
+  inStock: boolean
 }
 
 export interface State {

@@ -29,7 +29,6 @@ function App() {
             path="/register"
             element={!state.user ? <Register /> : <Navigate to="/" />}
           />
-         
 
           {/* <Route
             path="/userprofile/:id"
