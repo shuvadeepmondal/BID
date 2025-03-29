@@ -111,6 +111,7 @@ export const AddForm: React.FC = () => {
             .filter((tag) => tag), 
         };
 
+        
         const response = await fetch(
           `${import.meta.env.VITE_API}/api/products`,
           {
