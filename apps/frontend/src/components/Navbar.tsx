@@ -68,30 +68,13 @@ const Navbar = () => {
                   tags={tags}
                 />
               ))}
-            {state.user?.role === `${import.meta.env.VITE_ROLE}` ? (
-              <div className="flex flex-col gap-[30px]">
-                <NavItem
-                  closeNav={toogleMenu}
-                  href="/viewAttendance"
-                  tags="View Attendance"
-                />
-                <NavItem
-                  closeNav={toogleMenu}
-                  href="/usersAttendance"
-                  tags="Manage Attendance"
-                />
-                <NavItem
-                  closeNav={toogleMenu}
-                  href="/countAttendance"
-                  tags="Take Attendance"
-                />
-              </div>
-            ) : null}
+            
             {state.user && (
               <div className="flex flex-col gap-[30px]">
                 <div className="hover:text-indigo-500 font-semibold text-lg gabarito-regular cursor-pointer">
                   {state.user.email}
                 </div>
+                
                 <div
                   onClick={handleClick}
                   className="hover:text-indigo-500 font-semibold text-lg gabarito-regular cursor-pointer"
