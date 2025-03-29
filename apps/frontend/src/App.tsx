@@ -1,16 +1,16 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import "./index.css";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./components/Home";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Login from "./components/Login";
-import Market from "./components/Card"
-import Register from "./components/Register";
-import { useAuthContext } from "./hooks/useAuthContext";
 import AddProducts from "./components/AddProducts";
+import Market from "./components/Card";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Navbar from "./components/Navbar";
 import OffersPage from "./components/OffersPage";
 import ProductPage from "./components/Productpage";
+import Register from "./components/Register";
+import { useAuthContext } from "./hooks/useAuthContext";
+import "./index.css";
 
 function App() {
   const { state } = useAuthContext();
