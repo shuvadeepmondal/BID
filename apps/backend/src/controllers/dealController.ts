@@ -13,7 +13,7 @@ export const createDeal = async (req: Request, res: Response) => {
 
     const deal = new Deal({
       product: productId,
-      buyer: user.id,
+      buyer: user._id,
       seller: product.user,
       type,
       finalPrice: type === "exchange" ? undefined : finalPrice,

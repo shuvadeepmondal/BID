@@ -6,11 +6,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import ViewAttendance from "./components/ViewAttendance";
-import UserProfile from "./components/UserProfile";
-import TakeAttendance from "./components/TakeAttendance";
 import { useAuthContext } from "./hooks/useAuthContext";
-import UserAttendance from "./components/UserAttendance";
+
 
 function App() {
   const { state } = useAuthContext();
@@ -32,38 +29,9 @@ function App() {
             path="/register"
             element={!state.user ? <Register /> : <Navigate to="/" />}
           />
-          <Route
-            path="/viewAttendance"
-            element={
-              state.user?.role === `${import.meta.env.VITE_ROLE}` ? (
-                <ViewAttendance />
-              ) : (
-                <Navigate to="/" />
-              )
-            }
-          />
-          <Route
-            path="/usersAttendance"
-            element={
-              state.user?.role === `${import.meta.env.VITE_ROLE}` ? (
-                <UserAttendance />
-              ) : (
-                <Navigate to="/" />
-              )
-            }
-          />
-          <Route
-            path="/countAttendance"
-            element={
-              state.user?.role === `${import.meta.env.VITE_ROLE}` ? (
-                <TakeAttendance />
-              ) : (
-                <Navigate to="/" />
-              )
-            }
-          />
+         
 
-          <Route
+          {/* <Route
             path="/userprofile/:id"
             element={
               state.user?.role === `${import.meta.env.VITE_ROLE}` ? (
@@ -72,7 +40,7 @@ function App() {
                 <Navigate to="/" />
               )
             }
-          />
+          /> */}
         </Routes>
         <Footer />
       </BrowserRouter>
