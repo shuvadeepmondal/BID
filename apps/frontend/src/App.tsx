@@ -30,10 +30,7 @@ function App() {
             path="/register"
             element={!state.user ? <Register /> : <Navigate to="/" />}
           />
-          <Route
-            path="/add-items"
-            element={<AddProducts /> }
-          />
+         
 
           {/* <Route
             path="/userprofile/:id"
