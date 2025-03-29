@@ -6,8 +6,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import AddProducts from "./components/AddProducts";
 import { useAuthContext } from "./hooks/useAuthContext";
+import AddProducts from "./components/AddProducts";
 
 
 function App() {
@@ -30,8 +30,11 @@ function App() {
             path="/register"
             element={!state.user ? <Register /> : <Navigate to="/" />}
           />
-         
 
+          <Route
+            path="/add-product"
+            element={<AddProducts/>}
+          />
           {/* <Route
             path="/userprofile/:id"
             element={
