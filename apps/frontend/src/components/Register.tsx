@@ -10,9 +10,13 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
+    phone: "",
+    admissionYear: "",
+    department: "",
+    course: "",
   });
 
-  const { name, email, password } = formData;
+  const { name, email, password, phone, admissionYear, department, course } = formData;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -24,6 +28,7 @@ const Register = () => {
 
   const handleSubmit =async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
     await register(formData);
   };
 
@@ -33,6 +38,19 @@ const Register = () => {
         <h1 className="text-2xl xl:text-3xl font-extrabold text-indigo-400 ubuntu-bold">
           Register
         </h1>
+      
+        {error && (
+          <div className="w-full max-w-xs p-4 mb-4 text-red-800 bg-red-100 border border-red-400 rounded-lg shadow-md">
+            <strong>Error:</strong> {error}
+          </div>
+        )}
+
+        {isSucess && (
+          <div className="w-full max-w-xs p-4 mb-4 text-green-800 bg-green-100 border border-green-400 rounded-lg shadow-md">
+            🎉 Registration Successful!
+          </div>
+        )}
+
         <div className="w-full flex-1 mt-8">
           <form onSubmit={handleSubmit} className="mx-auto max-w-xs">
             <div className="flex flex-col gap-5">
@@ -53,6 +71,42 @@ const Register = () => {
                 className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                 placeholder="Email"
                 autoComplete="email"
+              />
+              <input
+                type="tel"
+                name="phone"
+                value={phone}
+                onChange={handleChange}
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                placeholder="Phone no."
+                autoComplete="phone_no"
+              />
+              <input
+                type="number"
+                name="admissionYear"
+                value={admissionYear}
+                onChange={handleChange}
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                placeholder="admissionYear"
+                autoComplete="admissionYear"
+              />
+              <input
+                type="text"
+                name="course"
+                value={course}
+                onChange={handleChange}
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                placeholder="course"
+                autoComplete="course"
+              />
+              <input
+                type="text"
+                name="department"
+                value={department}
+                onChange={handleChange}
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                placeholder="department"
+                autoComplete="department"
               />
               <input
                 type="password"
