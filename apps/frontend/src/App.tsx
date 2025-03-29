@@ -8,7 +8,8 @@ import Login from "./components/Login";
 import Market from "./components/Card"
 import Register from "./components/Register";
 import { useAuthContext } from "./hooks/useAuthContext";
-
+import AddProducts from "./components/AddProducts";
+import OffersPage from "./components/OffersPage";
 
 function App() {
   const { state } = useAuthContext();
@@ -31,11 +32,17 @@ function App() {
             element={!state.user ? <Register /> : <Navigate to="/" />}
           />
 
+
+
+
+          <Route path="/my-space" element={<AddProducts />} />
+
+          <Route path="/my-offers" element={<OffersPage />} />
+
           <Route
-            path="/market"
+                path="/market"
             element={<Market />}
           />
-
           {/* <Route
             path="/userprofile/:id"
             element={
