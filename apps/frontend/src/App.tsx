@@ -4,6 +4,7 @@ import AddProducts from "./components/AddProducts";
 import Market from "./components/Card";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
+import { LandingHero } from "./components/Landing-Hero";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import OffersPage from "./components/OffersPage";
@@ -40,6 +41,8 @@ function App() {
           <Route path="/market" element={<Market />} />
 
           <Route path="/market/:id" element={<ProductPage />} />
+
+          <Route path="/lan" element={<LandingHero />} />
 
           {/* <Route
             path="/userprofile/:id"
