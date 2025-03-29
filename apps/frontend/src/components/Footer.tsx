@@ -11,7 +11,7 @@ function Footer() {
           >
             <img src={logo} className="h-[55px] " alt="logo" />
             <h2 className="text-2xl font-bold text-indigo-400 ubuntu-bold">
-              Attendance
+              BID
             </h2>
           </Link>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 ">
@@ -40,8 +40,8 @@ function Footer() {
         <hr className="my-6 border-gray-200 sm:mx-auto  lg:my-8" />
         <span className="block text-sm text-gray-500 sm:text-center ">
           © Design And Devloped By{" "}
-          <Link to="https://puskarroy.site" className="hover:underline">
-            Puskar Roy
+          <Link to="" className="hover:underline">
+            Invincible Coders
           </Link>
         </span>
       </div>

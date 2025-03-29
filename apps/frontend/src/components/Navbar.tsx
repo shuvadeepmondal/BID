@@ -34,7 +34,7 @@ const Navbar = () => {
         <Link to="/" className="z-20 flex items-center gap-1">
           <img className="h-[55px] " src={logo} alt="Logo" />
           <h2 className="text-2xl font-bold text-indigo-400 ubuntu-bold">
-            Attendance
+            BID.
           </h2>
         </Link>
 
