@@ -8,6 +8,11 @@ export interface RegisterFormData {
   name: string;
   email: string;
   password: string;
+  phone : string;
+  admissionYear : string;
+  course : string;
+  department : string;
+
 }
 export interface LoginFormData {
   email: string;
