@@ -111,7 +111,7 @@ export const AddForm: React.FC = () => {
             .filter((tag) => tag), // Convert comma-separated string to array
         };
 
-        const response = await fetch("http://localhost:5050/api/products", {
+        const response = await fetch("https://a249-2409-40e0-2e-b44a-c824-2c25-484b-4c70.ngrok-free.app/api/products", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

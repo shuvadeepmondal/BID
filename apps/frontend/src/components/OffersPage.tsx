@@ -24,7 +24,7 @@ const OffersPage = () => {
   useEffect(() => {
     if (!state.user?.token) return; // Prevent fetching if no user is logged in
 
-    fetch("http://localhost:5050/api/products/iitkgp/my-products", {
+    fetch("https://a249-2409-40e0-2e-b44a-c824-2c25-484b-4c70.ngrok-free.app/api/products/iitkgp/my-products", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.user.token}`,
