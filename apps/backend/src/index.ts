@@ -25,7 +25,9 @@ const corsOptions: CorsOptions = {
     }
   },
 };
-app.use(config.DEV_ENV === 'PROD' ? cors(corsOptions) : cors());
+//app.use(config.DEV_ENV === 'PROD' ? cors(corsOptions) : cors());
+app.use(cors());
+
 app.use(express.json());
 app.use(helmet());
 app.use(mongoSanitize());
