@@ -1,0 +1,32 @@
+{
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/"
+    },
+    {
+      "src": "/register",
+      "dest": "/"
+    },
+    {
+      "src": "/login",
+      "dest": "/"
+    },
+    {
+      "src": "/viewAttendance",
+      "dest": "/"
+    },
+    {
+      "src": "/usersAttendance/*",
+      "dest": "/"
+    },
+    {
+      "src": "/userprofile",
+      "dest": "/"
+    },
+    {
+      "src": "/countAttendance",
+      "dest": "/"
+    }
+  ]
+}
