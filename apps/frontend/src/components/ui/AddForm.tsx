@@ -108,7 +108,7 @@ export const AddForm: React.FC = () => {
           tags: formData.tags
             .split(",")
             .map((tag) => tag.trim())
-            .filter((tag) => tag), // Convert comma-separated string to array
+            .filter((tag) => tag), 
         };
 
         const response = await fetch(
