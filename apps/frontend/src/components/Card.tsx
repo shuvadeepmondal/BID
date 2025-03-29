@@ -188,7 +188,7 @@ export default function Market() {
   const [loading, setLoading] = useState(true);
 const { state } = useAuthContext();
   useEffect(() => {
-    fetch("https://a249-2409-40e0-2e-b44a-c824-2c25-484b-4c70.ngrok-free.app/api/products/iitkgp", {
+    fetch(`${import.meta.env.VITE_API}/api/products/iitkgp`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.user?.token}`,

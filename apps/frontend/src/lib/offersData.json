@@ -1,0 +1,75 @@
+{
+  "offers": [
+    {
+      "_id": "offer1",
+      "product": {
+        "_id": "product1",
+        "name": "iPhone 13 Pro",
+        "images": ["https://via.placeholder.com/150"],
+        "price": 999.99
+      },
+      "buyer": {
+        "_id": "buyer1",
+        "name": "John Doe",
+        "email": "john@example.com"
+      },
+      "offeredPrice": 850.0,
+      "status": "pending",
+      "createdAt": "2023-07-15T10:30:00.000Z"
+    },
+    {
+      "_id": "offer2",
+      "product": {
+        "_id": "product2",
+        "name": "MacBook Air M1",
+        "images": ["https://via.placeholder.com/150"],
+        "price": 1299.99
+      },
+      "buyer": {
+        "_id": "buyer2",
+        "name": "Jane Smith",
+        "email": "jane@example.com"
+      },
+      "offeredPrice": 1100.0,
+      "status": "accepted",
+      "createdAt": "2023-07-12T14:45:00.000Z"
+    },
+    {
+      "_id": "offer3",
+      "product": {
+        "_id": "product3",
+        "name": "Sony PlayStation 5",
+        "images": ["https://via.placeholder.com/150"],
+        "price": 499.99
+      },
+      "buyer": {
+        "_id": "buyer3",
+        "name": "Mike Johnson",
+        "email": "mike@example.com"
+      },
+      "offeredPrice": 450.0,
+      "status": "rejected",
+      "createdAt": "2023-07-07T09:15:00.000Z"
+    }
+  ],
+  "comments": {
+    "offer1": [
+      {
+        "id": "comment1",
+        "offerId": "offer1",
+        "userId": "seller1",
+        "userName": "Seller",
+        "message": "Thanks for your offer. Could you go a bit higher?",
+        "timestamp": "2023-07-16T08:30:00.000Z"
+      },
+      {
+        "id": "comment2",
+        "offerId": "offer1",
+        "userId": "buyer1",
+        "userName": "John Doe",
+        "message": "I can go up to $875. That's my best offer.",
+        "timestamp": "2023-07-16T20:30:00.000Z"
+      }
+    ]
+  }
+}

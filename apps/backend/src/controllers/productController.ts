@@ -92,15 +92,15 @@ export const getProductById = async (req: Request, res: Response) => {
   const { productId } = req.params; // Extract productId from URL params
 
   // Check if user is authenticated
-  if (!user || !user._id) {
-    return res.status(401).json({
-      message: "Authentication required: User ID not found in request",
-    });
-  }
+  // if (!user || !user._id) {
+  //   return res.status(401).json({
+  //     message: "Authentication required: User ID not found in request",
+  //   });
+  // }
 
   try {
     // Find the product by ID and ensure it belongs to the user
-    const product = await Product.findOne({ _id: productId, user: user._id });
+    const product = await Product.findOne({ _id: productId});
     console.log(productId);
     
     // If no product is found or it doesn't belong to the user
