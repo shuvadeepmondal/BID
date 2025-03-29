@@ -1,51 +1,117 @@
-import { useState } from "react"
-import { ChevronLeft, ChevronRight, Heart, Info, Maximize, ZapIcon } from "lucide-react"
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Heart,
+  Info,
+} from "lucide-react";
+import { useAuthContext } from "../hooks/useAuthContext";
+
+// Define the product data type
+interface Product {
+  _id: string;
+  name: string;
+  images: string[];
+  condition: number;
+  description: string;
+  category: string;
+  price: number;
+  acceptsCrypto: boolean;
+  walletAddress: string;
+  user: string;
+  campus: string;
+  status: string;
+  tags: string[];
+  views: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 
 export default function ProductPage() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const images = [
-    "src/assets/book.png?height=500&width=500",
-    "src/assets/book2.png?height=500&width=500",
-    "src/assets/engd.png?height=500&width=500",
-    "src/assets/hard.png?height=500&width=500",
-    "src/assets/book.png?height=500&width=500",
-  ]
+  const { id } = useParams(); // Get product ID from URL
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const { state } = useAuthContext();
+
+  // Fetch product data
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API}/api/products/iitkgp/items/${id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${state.user?.token}`,
+            },
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch product");
+        }
+        const data: Product = await response.json();
+        setProduct(data);
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading) return <div className="text-center text-lg">Loading...</div>;
+  if (error) return <div className="text-center text-red-500">{error}</div>;
+  if (!product)
+    return <div className="text-center text-gray-500">Product not found.</div>;
 
   return (
     <div className="max-w-7xl mx-auto px-4 pb-8 mt-10">
-
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Left Column - Images */}
         <div className="md:col-span-7">
           <div className="relative">
-            {/* Main Image */}
             <div className="border bg-gray-100 relative">
               <div className="relative h-[500px] w-full">
                 <img
-                  src={images[currentImageIndex] || "/placeholder.svg"}
-                  alt="Product photo"
+                  src={
+                    product.images?.[currentImageIndex] || "/placeholder.svg"
+                  }
+                  alt={product.name}
                   className="absolute inset-0 w-full h-full object-contain"
                 />
               </div>
-              <button className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-1 shadow-md">
+              {/* Image Navigation */}
+              <button
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-1 shadow-md"
+                onClick={() =>
+                  setCurrentImageIndex((prev) => Math.max(prev - 1, 0))
+                }
+                disabled={currentImageIndex === 0}
+              >
                 <ChevronLeft className="h-6 w-6" />
               </button>
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-1 shadow-md">
+              <button
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-1 shadow-md"
+                onClick={() =>
+                  setCurrentImageIndex((prev) =>
+                    Math.min(prev + 1, product.images.length - 1)
+                  )
+                }
+                disabled={currentImageIndex === product.images.length - 1}
+              >
                 <ChevronRight className="h-6 w-6" />
               </button>
-              <div className="absolute top-2 right-2 flex gap-2">
-                <button className="bg-white/80 rounded-full p-1 shadow-md">
-                  <Maximize className="h-5 w-5" />
-                </button>
-                <button className="bg-white/80 rounded-full p-1 shadow-md">
-                  <Heart className="h-5 w-5" />
-                </button>
-              </div>
             </div>
 
             {/* Thumbnails */}
             <div className="grid grid-cols-5 gap-2 mt-2">
-              {images.map((img, index) => (
+              {product.images?.map((img, index) => (
                 <button
                   key={index}
                   className={`border ${index === currentImageIndex ? "border-blue-500" : "border-gray-300"} p-1`}
@@ -53,7 +119,7 @@ export default function ProductPage() {
                 >
                   <div className="relative h-20 w-full">
                     <img
-                      src={img || "src/assets/book.png"}
+                      src={img}
                       alt={`Thumbnail ${index + 1}`}
                       className="absolute inset-0 w-full h-full object-cover"
                     />
@@ -66,39 +132,25 @@ export default function ProductPage() {
 
         {/* Right Column - Product Info */}
         <div className="md:col-span-5">
-          <h1 className="text-2xl font-bold mb-4">
-            Java Book Authored by Pujan Sutradhar
-          </h1>
+          <h1 className="text-2xl font-bold mb-4">{product.name}</h1>
 
           {/* Seller Info */}
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 bg-gray-200 rounded-sm"></div>
             <div>
               <div className="flex items-center gap-1">
-                <span>tuman sarkar</span>
+                <span>{product.user || "Unknown Seller"}</span>
                 <span className="text-gray-500">(271)</span>
               </div>
-              <div className="flex flex-wrap items-center gap-x-3 text-sm">
-                <a href="#" className="text-blue-600 hover:underline">
-                  100% positive
-                </a>
-                <span className="text-gray-400 hidden sm:inline">|</span>
-                <a href="#" className="text-blue-600 hover:underline">
-                  Seller's other items
-                </a>
-                <span className="text-gray-400 hidden sm:inline">|</span>
-                <a href="#" className="text-blue-600 hover:underline">
-                  Contact seller
-                </a>
-              </div>
             </div>
-            <ChevronRight className="ml-auto h-5 w-5 text-gray-400" />
           </div>
 
           {/* Price */}
           <div className="mb-6">
-            <div className="text-2xl font-bold">INR 100</div>
-            <div className="text-sm text-gray-600">or Best Offer</div>
+            <div className="text-2xl font-bold">INR {product.price}</div>
+            {product.acceptsCrypto && (
+              <div className="text-sm text-green-600">Accepts Crypto</div>
+            )}
           </div>
 
           <hr className="my-4" />
@@ -106,7 +158,7 @@ export default function ProductPage() {
           {/* Condition */}
           <div className="flex items-center gap-2 mb-6">
             <div className="font-medium">Condition:</div>
-            <div>New without tags</div>
+            <div>{product.condition || "Not specified"}</div>
             <Info className="h-4 w-4 text-gray-500" />
           </div>
 
@@ -127,69 +179,18 @@ export default function ProductPage() {
             </button>
           </div>
 
-          {/* Watchlist Info */}
-          <div className="flex items-center gap-2 mt-4 bg-gray-50 p-3 rounded-md">
-            <ZapIcon className="h-5 w-5 text-gray-700" />
-            <div className="text-sm">
-              People are checking this out. <span className="font-medium">6 have added this to their watchlist.</span>
-            </div>
-          </div>
-
           {/* Shipping Info */}
           <div className="mt-6 space-y-3">
-
             <div className="flex flex-col sm:flex-row">
               <div className="w-24 text-gray-600 mb-1 sm:mb-0">Delivery:</div>
-              <div>
-                <div className="flex flex-wrap items-center gap-1">
-                  <div className=" text-white text-xl p-1">
-                    <span>📦</span>
-                  </div>
-                  <span>Estimated between Tomorrow, Mar 31 and Mon </span>
-                  <Info className="h-4 w-4 text-gray-500" />
-                </div>
-                <div className="text-sm mt-1">
-                  Please note the delivery estimate is{" "}
-                  <span className="font-medium">Order within 10 min.</span>
-                </div>
+              <div className="text-sm">
+                Estimated between <strong>Tomorrow</strong> and{" "}
+                <strong>Monday</strong>
               </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row">
-              <div className="w-24 text-gray-600 mb-1 sm:mb-0">Returns:</div>
-              <div className="text-sm">2 days returns. Buyer pays for return shipping. If you use avalanche</div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Similar Items */}
-      <div className="mt-8">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Similar Items</h2>
-          <a href="#" className="text-blue-600 hover:underline">
-            See all
-          </a>
-        </div>
-        <div className="text-xs text-gray-500 mb-2">Sponsored</div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[1, 2, 3, 4].map((item) => (
-            <div key={item} className="border rounded-md overflow-hidden relative">
-              <button className="absolute top-2 right-2 z-10 bg-white/80 rounded-full p-1 shadow-sm">
-                <Heart className="h-4 w-4" />
-              </button>
-              <div className="relative h-48 w-full">
-                <img
-                  src="/placeholder.svg?height=200&width=200"
-                  alt={`Similar item ${item}`}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
-

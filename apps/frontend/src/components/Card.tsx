@@ -188,7 +188,7 @@ export default function Market() {
   const [loading, setLoading] = useState(true);
 const { state } = useAuthContext();
   useEffect(() => {
-    fetch("http://localhost:5050/api/products/iitkgp", {
+    fetch(`${import.meta.env.VITE_API}/api/products/iitkgp`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.user?.token}`,

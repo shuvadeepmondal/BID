@@ -111,14 +111,17 @@ export const AddForm: React.FC = () => {
             .filter((tag) => tag), // Convert comma-separated string to array
         };
 
-        const response = await fetch("http://localhost:5050/api/products", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${state.user?.token}`,
-          },
-          body: JSON.stringify(productData),
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API}/api/products`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${state.user?.token}`,
+            },
+            body: JSON.stringify(productData),
+          }
+        );
 
         if (!response.ok) {
           const errorData = await response.json();

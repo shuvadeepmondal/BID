@@ -24,7 +24,7 @@ const OffersPage = () => {
   useEffect(() => {
     if (!state.user?.token) return; // Prevent fetching if no user is logged in
 
-    fetch("http://localhost:5050/api/products/iitkgp/my-products", {
+    fetch(`${import.meta.env.VITE_API}/api/products/iitkgp/my-products`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.user.token}`,
