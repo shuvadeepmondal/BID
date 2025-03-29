@@ -53,6 +53,8 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
   if (!name || !email || !password) {
     throw Error('All fields must be filled');
   }
+  console.log(campus);
+  
   if (!validator.isEmail(email)) {
     throw Error('Email is not valid');
   }
@@ -66,7 +68,7 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
     const user = await UserModel.create({
       email,
       password: hash,
-      campus,
+      campus:'iitkgp',
       name,
       phone,
       admissionYear,

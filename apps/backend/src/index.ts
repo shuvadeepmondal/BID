@@ -1,9 +1,8 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import helmet from 'helmet';
-import xss from 'xss-clean';
-import hpp from 'hpp';
 import rateLimit from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
+import morgan from "morgan";
 import cors, { CorsOptions } from 'cors';
 import config from './config/config';
 import CheckError from './util/checkError';
@@ -29,9 +28,8 @@ const corsOptions: CorsOptions = {
 app.use(config.DEV_ENV === 'PROD' ? cors(corsOptions) : cors());
 app.use(express.json());
 app.use(helmet());
-app.use(xss());
-app.use(hpp());
 app.use(mongoSanitize());
+app.use(morgan("combined"));
 //app.set('trust proxy', true);
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
