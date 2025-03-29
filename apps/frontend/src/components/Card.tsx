@@ -1,4 +1,5 @@
 import Category from "./Category";
+import {Link} from "react-router-dom"
 
 // Define the type for an item
 interface Item {
@@ -40,9 +41,11 @@ function ItemCard({ item }: ItemCardProps) {
           </span>
           <span className="text-lg font-bold">${item.price}</span>
         </div>
+        <Link to = "/product">
         <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-2 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
           View Details
         </button>
+        </Link>
       </div>
     </div>
   );
