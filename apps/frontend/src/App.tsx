@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
+import Market from "./components/Card"
 import Register from "./components/Register";
 import { useAuthContext } from "./hooks/useAuthContext";
 
@@ -28,6 +29,11 @@ function App() {
           <Route
             path="/register"
             element={!state.user ? <Register /> : <Navigate to="/" />}
+          />
+
+          <Route
+            path="/market"
+            element={<Market />}
           />
 
           {/* <Route
