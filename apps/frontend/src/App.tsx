@@ -11,6 +11,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import AddProducts from "./components/AddProducts";
 import OffersPage from "./components/OffersPage";
 import ProductPage from "./components/Productpage";
+import Cart from "./components/Cart";
 
 function App() {
   const { state } = useAuthContext();
@@ -40,6 +41,8 @@ function App() {
           <Route path="/market" element={<Market />} />
 
           <Route path="/market/:id" element={<ProductPage />} />
+
+          <Route path="/mycart" element={<Cart />} />
 
           {/* <Route
             path="/userprofile/:id"
