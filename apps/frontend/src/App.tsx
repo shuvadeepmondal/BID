@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
+import Market from "./components/Card"
 import Register from "./components/Register";
 import { useAuthContext } from "./hooks/useAuthContext";
 import AddProducts from "./components/AddProducts";
@@ -31,10 +32,17 @@ function App() {
             element={!state.user ? <Register /> : <Navigate to="/" />}
           />
 
+
+
+
           <Route path="/my-space" element={<AddProducts />} />
 
           <Route path="/my-offers" element={<OffersPage />} />
 
+          <Route
+                path="/market"
+            element={<Market />}
+          />
           {/* <Route
             path="/userprofile/:id"
             element={
