@@ -21,6 +21,8 @@ It is a on-campus platform catering to the needs of selling and refurbishing thi
 
 ## Application Architecture
 
+![image](https://github.com/user-attachments/assets/eff604e1-1f20-4edf-bd92-a3d6f7e9a4aa)
+
 Our application follows a modern web architecture with the following components:
 
 ### Frontend
@@ -45,7 +47,9 @@ The architecture enables seamless communication between the frontend and backend
 
 ## Smart Contract
 
-The Application has three smart-contract function those are:
+![image](https://github.com/user-attachments/assets/7676cdaf-5a67-4674-ac1e-e48be785d6e4)
+
+The Smart Contract consists of Three functions:
 
 ### purchaseProduct()
 
