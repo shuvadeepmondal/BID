@@ -2,27 +2,27 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { LoginFormData } from "../interfaces";
 import { useLogin } from "../hooks/useLogin";
+
 const Login = () => {
   const { login, error, isLoading, isSucess } = useLogin();
-    const [formData, setFormData] = useState<LoginFormData>({
-      email: "",
-      password: "",
+  const [formData, setFormData] = useState<LoginFormData>({
+    email: "",
+    password: "",
+  });
+  const { email, password } = formData;
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
-    const { email, password } = formData;
+  };
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target;
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    };
-
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-
-      await login(formData)
-    };
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await login(formData);
+  };
 
   return (
     <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12 sm:w-[60%] sm:mx-auto ">
@@ -54,15 +54,21 @@ const Login = () => {
               disabled={isLoading}
               className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
             >
-              <svg
-                className="w-6 h-6 -ml-2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></svg>
-              <span className="ml-3">Login</span>
+              {isLoading ? (
+                <svg
+                  className="w-6 h-6 animate-spin"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="12" cy="12" r="10" stroke="gray" strokeWidth="4" fill="none" />
+                  <path d="M4 12a8 8 0 018-8" stroke="white" strokeWidth="4" />
+                </svg>
+              ) : null}
+              <span className={`${isLoading ? "ml-3" : ""}`}>Login</span>
             </button>
             {error && (
               <div className="bg-rose-200 text-rose-500 p-5 rounded-lg mt-4">
