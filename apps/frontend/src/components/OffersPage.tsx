@@ -24,7 +24,8 @@ const OffersPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { state } = useAuthContext();
-
+  console.log(offers);
+  
   useEffect(() => {
     fetch("http://localhost:5050/api/offers/my-offers", {
       headers: {
@@ -54,46 +55,10 @@ const OffersPage: React.FC = () => {
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">My Offers</h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {offers.length === 0 ? (
-          <p className="text-gray-600">No offers found</p>
-        ) : (
-          offers.map((offer) => (
-            <div
-              key={offer._id}
-              className="border p-4 rounded-lg shadow-md bg-white"
-            >
-              <h3 className="text-lg font-semibold text-gray-800">
-                {offer.product.name}
-              </h3>
-              <p className="text-gray-700">
-                <strong>Price:</strong> ${offer.offeredPrice}
-              </p>
-              <p className="text-gray-600">
-                <strong>Buyer:</strong> {offer.buyer.name}
-              </p>
-              <p className="text-gray-600">
-                <strong>Email:</strong> {offer.buyer.email}
-              </p>
-              <p
-                className={`font-semibold ${
-                  offer.status === "active"
-                    ? "text-green-500"
-                    : offer.status === "pending"
-                      ? "text-yellow-500"
-                      : "text-red-500"
-                }`}
-              >
-                <strong>Status:</strong> {offer.status}
-              </p>
-              <p className="text-gray-500 text-sm mt-2">
-                Created: {new Date(offer.createdAt).toLocaleDateString()}
-              </p>
-            </div>
-          ))
-        )}
+    <div className="w-[95%] mx-auto mb-[20rem]">
+      <div className="absolute circlePosition w-screen sm:w-[590px] h-[400px] bg-gradient-to-r from-indigo-400 rounded-[100%] top-[70%] left-[50%]  blur-[90px] translate-x-[-50%] translate-y-[-50%] z-[-1]" />
+      <div className="header my-4 h-12 px-10 flex items-center justify-center">
+        <h1 className="font-bold text-3xl">My <span className="text-indigo-600">Offers</span></h1>
       </div>
     </div>
   );

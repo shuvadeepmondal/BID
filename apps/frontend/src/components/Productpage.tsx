@@ -1,6 +1,16 @@
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
 import { useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Heart, X } from "lucide-react";
+=======
+import { useParams, Link } from "react-router-dom";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Heart,
+  Info,
+} from "lucide-react";
+>>>>>>> 66ef001de3eb81925b9067a3da00778f75248c4f
 import { useAuthContext } from "../hooks/useAuthContext";
 
 // Define the product data type
@@ -190,14 +200,21 @@ const handleSubmitOffer = async () => {
             <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-full text-lg">
               Buy It Now
             </button>
-            <button className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full">
+            <Link to = "/mycard">
+            <button  className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full">
               Add to cart
             </button>
+<<<<<<< HEAD
             <button
               className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full"
               onClick={() => setOfferModalOpen(true)}
             >
               Make Offer
+=======
+            </Link>
+            <button className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full">
+              Make offer
+>>>>>>> 66ef001de3eb81925b9067a3da00778f75248c4f
             </button>
             <button className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full flex items-center justify-center">
               <Heart className="h-4 w-4 mr-2" />

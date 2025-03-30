@@ -27,7 +27,7 @@ export const OffersList: React.FC<OffersListProps> = ({
   formatDate,
 }) => {
   return (
-    <div className="w-full m-1 bg-white shadow-lg text-lg rounded-sm border border-gray-200">
+    <div className="w-full mb-10 backdrop:blur-lg shadow-lg text-lg rounded-sm border border-gray-200">
       <div className="overflow-x-auto rounded-lg p-3">
         {offers.length > 0 ? (
           <>
