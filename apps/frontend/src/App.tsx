@@ -16,6 +16,7 @@ import AddForm from "./components/ui/AddForm";
 import "./index.css";
 import TradingInterface from "./components/Trading-interface";
 import OfferWithId from "./components/OfferWithId";
+import RecivedOrder from "./components/RecivedOrder";
 
 function App() {
   const { state } = useAuthContext();
@@ -37,20 +38,17 @@ function App() {
             path="/register"
             element={!state.user ? <Register /> : <Navigate to="/" />}
           />
-
           <Route path="/my-space" element={<AddProducts />} />
-
           <Route path="/my-offers" element={<OffersPage />} />
           <Route path="/my-offers/:id/:price/:name" element={<OfferWithId />} />
+          <Route path="/recived-orders" element={<RecivedOrder />} />
 
           <Route path="/market" element={<Market />} />
           <Route path="/add-item" element={<AddForm />} />
-
           <Route path="/market/:id" element={<ProductPage />} />
           <Route path="/mycart" element={<Cart />} />
           <Route path="/lan" element={<LandingHero />} />
           <Route path="/trading-interface" element={<TradingInterface />} />
-
           {/* <Route
             path="/userprofile/:id"
             element={

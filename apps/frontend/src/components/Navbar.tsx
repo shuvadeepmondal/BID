@@ -101,6 +101,9 @@ const Navbar = () => {
                   <Link to={"/add-item"}>Add Item</Link>
                 </div>
                 <div className="hover:text-indigo-500 font-semibold text-lg gabarito-regular cursor-pointer">
+                  <Link to={"/recived-orders"}>Recived Orders</Link>
+                </div>
+                <div className="hover:text-indigo-500 font-semibold text-lg gabarito-regular cursor-pointer">
                   <Link to={"/my-offers"}>My Offers</Link>
                 </div>
 

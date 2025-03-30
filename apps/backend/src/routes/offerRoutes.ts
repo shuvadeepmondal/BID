@@ -2,6 +2,7 @@ import express from "express";
 import { body } from "express-validator";
 import {
   createOffer,
+  getAcceptedOffers,
   getMyOfferRequests,
   
   respondToOffer,
@@ -20,6 +21,8 @@ router.post(
 
 
 router.get("/my-offers", authMiddleware, getMyOfferRequests);
+router.get("/my-accpeted-offers", authMiddleware, getAcceptedOffers);
+
 router.post(
   "/respond",
   authMiddleware,
