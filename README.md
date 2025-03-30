@@ -213,6 +213,14 @@ We welcome contributions to improve this application! Here's how you can contrib
 
 Please make sure to follow our coding standards and keep your code clean and well-documented. For major changes, please open an issue first to discuss what you would like to change.
 
+## Our Contributors
+<div align="center" style="padding: 40px;">
+    <a href="https://github.com/Puskar-Roy/BID/graphs/contributors">
+      <img src="https://contrib.rocks/image?repo=Puskar-Roy/BID" />
+    </a>
+</div>
+
+
 ## Conclusion
 
 This project combines modern web development technologies with blockchain capabilities to create a robust and scalable application. The architecture is designed to be modular and maintainable, allowing for future expansions and improvements.
