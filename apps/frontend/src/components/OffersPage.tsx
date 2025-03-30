@@ -1,225 +1,100 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { OffersList } from "./offers/OffersList";
-import { Comment, Offer } from "./offers/types";
 
-const OffersPage = () => {
+// Update the Offer interface to match the actual API response
+interface Offer {
+  _id: string;
+  product: {
+    _id: string;
+    name: string;
+  };
+  buyer: {
+    _id: string;
+    email: string;
+    name: string;
+  };
+  offeredPrice: number;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+const OffersPage: React.FC = () => {
   const [offers, setOffers] = useState<Offer[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error] = useState<string | null>(null);
-  const [comments, setComments] = useState<Record<string, Comment[]>>({});
-  const [newComment, setNewComment] = useState<Record<string, string>>({});
-  const [expandedOffers, setExpandedOffers] = useState<Record<string, boolean>>(
-    {}
-  );
-
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const { state } = useAuthContext();
 
-  // Sample dummy data for offers
-  const dummyOffers: Offer[] = [
-    {
-      _id: "offer1",
-      product: {
-        _id: "product1",
-        name: "iPhone 13 Pro",
-        images: ["https://via.placeholder.com/150"],
-        price: 999.99,
-      },
-      buyer: {
-        _id: "buyer1",
-        name: "John Doe",
-        email: "john@example.com",
-      },
-      offeredPrice: 850.0,
-      status: "pending",
-      createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago
-    },
-    {
-      _id: "offer2",
-      product: {
-        _id: "product2",
-        name: "MacBook Air M1",
-        images: ["https://via.placeholder.com/150"],
-        price: 1299.99,
-      },
-      buyer: {
-        _id: "buyer2",
-        name: "Jane Smith",
-        email: "jane@example.com",
-      },
-      offeredPrice: 1100.0,
-      status: "accepted",
-      createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5 days ago
-    },
-    {
-      _id: "offer3",
-      product: {
-        _id: "product3",
-        name: "Sony PlayStation 5",
-        images: ["https://via.placeholder.com/150"],
-        price: 499.99,
-      },
-      buyer: {
-        _id: "buyer3",
-        name: "Mike Johnson",
-        email: "mike@example.com",
-      },
-      offeredPrice: 450.0,
-      status: "rejected",
-      createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(), // 10 days ago
-    },
-  ];
-
-  // Sample dummy data for comments
-  const dummyComments: Record<string, Comment[]> = {
-    offer1: [
-      {
-        id: "comment1",
-        offerId: "offer1",
-        userId: "seller1",
-        userName: "Seller",
-        message: "Thanks for your offer. Could you go a bit higher?",
-        timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-      },
-      {
-        id: "comment2",
-        offerId: "offer1",
-        userId: "buyer1",
-        userName: "John Doe",
-        message: "I can go up to $875. That's my best offer.",
-        timestamp: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(),
-      },
-    ],
-  };
-
-  // Initialize state with dummy data instead of fetching from backend
   useEffect(() => {
-    setLoading(true);
+    fetch("http://localhost:5050/api/offers/my-offers", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.user?.token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch offers");
+        }
+        return response.json();
+      })
+      .then((data: Offer[]) => {
+        setOffers(data);
+        console.log("Data is", data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+      });
+  }, [state.user?.token]);
 
-    // Set offers with dummy data
-    setOffers(dummyOffers);
-
-    // Initialize comments with dummy data
-    const initialComments: Record<string, Comment[]> = {};
-    const initialExpanded: Record<string, boolean> = {};
-    const initialNewComment: Record<string, string> = {};
-
-    dummyOffers.forEach((offer) => {
-      initialComments[offer._id] = dummyComments[offer._id] || [];
-      initialExpanded[offer._id] = false;
-      initialNewComment[offer._id] = "";
-    });
-
-    setComments(initialComments);
-    setExpandedOffers(initialExpanded);
-    setNewComment(initialNewComment);
-    setLoading(false);
-  }, []);
-
-  // Handle offer response (accept/reject) - using dummy data
-  const handleOfferResponse = (
-    offerId: string,
-    status: "accepted" | "rejected"
-  ) => {
-    // Simulate a short delay to mimic API call
-    setTimeout(() => {
-      // Update the offers list with the updated status
-      setOffers((prevOffers) =>
-        prevOffers.map((offer) =>
-          offer._id === offerId ? { ...offer, status } : offer
-        )
-      );
-
-      // Show a success message (optional)
-      console.log(`Offer ${offerId} ${status} successfully`);
-    }, 300);
-  };
-
-  // Toggle comment section visibility
-  const toggleComments = (offerId: string) => {
-    setExpandedOffers((prev) => ({
-      ...prev,
-      [offerId]: !prev[offerId],
-    }));
-  };
-
-  // Handle new comment input change
-  const handleCommentChange = (offerId: string, value: string) => {
-    setNewComment((prev) => ({
-      ...prev,
-      [offerId]: value,
-    }));
-  };
-
-  // Add a new comment - using dummy data
-  const addComment = (offerId: string) => {
-    if (!newComment[offerId].trim()) return;
-
-    // Create a new comment object
-    const newCommentObj: Comment = {
-      id: `comment${Date.now()}`,
-      offerId,
-      userId: "current-user",
-      userName: state.user?.email || "You",
-      message: newComment[offerId],
-      timestamp: new Date().toISOString(),
-    };
-
-    // Add comment to the list
-    setComments((prev) => ({
-      ...prev,
-      [offerId]: [...(prev[offerId] || []), newCommentObj],
-    }));
-
-    // Clear the input
-    setNewComment((prev) => ({
-      ...prev,
-      [offerId]: "",
-    }));
-  };
-
-  // Format date for display
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
-
-  if (loading) {
-    return (
-      <div className="w-full flex justify-center items-center p-8">
-        <div className="text-xl">Loading offers...</div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="w-full flex justify-center items-center p-8">
-        <div className="text-xl text-red-500">{error}</div>
-      </div>
-    );
-  }
+  if (loading)
+    return <p className="text-center text-gray-500">Loading offers...</p>;
+  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
-    <div className="w-[95%] mx-auto">
-      <div className="header my-3 h-12 px-10 flex items-center justify-between">
-        <h1 className="font-medium text-2xl">My Offers</h1>
+    <div className="p-6">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">My Offers</h2>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {offers.length === 0 ? (
+          <p className="text-gray-600">No offers found</p>
+        ) : (
+          offers.map((offer) => (
+            <div
+              key={offer._id}
+              className="border p-4 rounded-lg shadow-md bg-white"
+            >
+              <h3 className="text-lg font-semibold text-gray-800">
+                {offer.product.name}
+              </h3>
+              <p className="text-gray-700">
+                <strong>Price:</strong> ${offer.offeredPrice}
+              </p>
+              <p className="text-gray-600">
+                <strong>Buyer:</strong> {offer.buyer.name}
+              </p>
+              <p className="text-gray-600">
+                <strong>Email:</strong> {offer.buyer.email}
+              </p>
+              <p
+                className={`font-semibold ${
+                  offer.status === "active"
+                    ? "text-green-500"
+                    : offer.status === "pending"
+                      ? "text-yellow-500"
+                      : "text-red-500"
+                }`}
+              >
+                <strong>Status:</strong> {offer.status}
+              </p>
+              <p className="text-gray-500 text-sm mt-2">
+                Created: {new Date(offer.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+          ))
+        )}
       </div>
-
-      <OffersList
-        offers={offers}
-        comments={comments}
-        expandedOffers={expandedOffers}
-        newComment={newComment}
-        onToggleComments={toggleComments}
-        onOfferResponse={handleOfferResponse}
-        onCommentChange={handleCommentChange}
-        onAddComment={addComment}
-        formatDate={formatDate}
-      />
     </div>
   );
 };

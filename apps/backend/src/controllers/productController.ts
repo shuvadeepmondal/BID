@@ -91,18 +91,11 @@ export const getProductById = async (req: Request, res: Response) => {
   const user = (req as any).user;
   const { productId } = req.params; // Extract productId from URL params
 
-  // Check if user is authenticated
-  // if (!user || !user._id) {
-  //   return res.status(401).json({
-  //     message: "Authentication required: User ID not found in request",
-  //   });
-  // }
-
   try {
     // Find the product by ID and ensure it belongs to the user
-    const product = await Product.findOne({ _id: productId});
+    const product = await Product.findOne({ _id: productId });
     console.log(productId);
-    
+
     // If no product is found or it doesn't belong to the user
     if (!product) {
       return res.status(404).json({
@@ -112,6 +105,33 @@ export const getProductById = async (req: Request, res: Response) => {
 
     // Return the product details
     res.json(product);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
+
+export const searchProducts = async (req: Request, res: Response) => {
+  const { q } = req.query;
+
+  // Validate query parameter
+  if (!q || typeof q !== "string") {
+    return res.status(400).json({ message: "Search term is required" });
+  }
+
+  try {
+   
+    const products = await Product.find({
+      name: { $regex: new RegExp(q, "i") }, // 'i' for case-insensitive
+      status: "available", // Only return available products
+    }) // Optional: Include user info
+
+    // if (!products.length) {
+    //   return res
+    //     .status(404)
+    //     .json({ message: "No products found matching your search" });
+    // }
+
+    res.json(products);
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }

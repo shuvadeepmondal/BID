@@ -2,26 +2,48 @@ import { Request, Response } from "express";
 import OfferRequest, { IOfferRequest } from "../models/OfferRequest";
 import Product from "../models/Product";
 
+
 export const createOffer = async (req: Request, res: Response) => {
   const { productId, offeredPrice } = req.body;
   const user = (req as any).user;
 
-  try {
-    const product = await Product.findById(productId);
-    if (!product) return res.status(404).json({ message: "Product not found" });
+  // Check if user is authenticated
+  if (!user || !user._id) {
+    return res
+      .status(401)
+      .json({ message: "Authentication required: User not found in request" });
+  }
 
+  try {
+    // Find the product by ID
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    console.log(product.user.toString());
+    console.log(user._id.toString());
+
+    
+    // Check if the user is trying to offer on their own product
+    if (product.user.toString() === user._id.toString()) {
+      return res
+        .status(403)
+        .json({ message: "You cannot make an offer on your own product" });
+    }
+
+    // Create the offer
     const offer = new OfferRequest({
       product: productId,
       buyer: user._id,
       offeredPrice,
     });
     await offer.save();
+
     res.status(201).json(offer);
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
 };
-
 export const getMyOfferRequests = async (req: Request, res: Response) => {
   const user = (req as any).user;
   try {

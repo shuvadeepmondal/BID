@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Heart,
-  Info,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Heart, X } from "lucide-react";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 // Define the product data type
@@ -28,14 +23,20 @@ interface Product {
   updatedAt: string;
 }
 
-
 export default function ProductPage() {
-  const { id } = useParams(); // Get product ID from URL
+  const { id } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const { state } = useAuthContext();
+
+  // Modal state for making an offer
+  const [isOfferModalOpen, setOfferModalOpen] = useState<boolean>(false);
+  const [offerPrice, setOfferPrice] = useState<number | "">("");
+
+
+  
 
   // Fetch product data
   useEffect(() => {
@@ -63,12 +64,48 @@ export default function ProductPage() {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [id, state.user?.token]);
 
   if (loading) return <div className="text-center text-lg">Loading...</div>;
   if (error) return <div className="text-center text-red-500">{error}</div>;
   if (!product)
     return <div className="text-center text-gray-500">Product not found.</div>;
+
+const handleSubmitOffer = async () => {
+  if (offerPrice === "" || offerPrice <= 0) {
+    alert("Please enter a valid offer price.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API}/api/offers`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.user?.token}`, // Include token if required
+      },
+      body: JSON.stringify({
+        productId: product._id,
+        offeredPrice: offerPrice,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to submit offer");
+    }
+
+    const data = await response.json();
+    console.log("Offer submitted successfully:", data);
+
+    alert("Offer submitted successfully!");
+    setOfferModalOpen(false);
+    setOfferPrice("");
+  } catch (error) {
+    console.error("Error submitting offer:", error);
+    alert("Error submitting offer. Please try again.");
+  }
+};
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 pb-8 mt-10">
@@ -114,7 +151,11 @@ export default function ProductPage() {
               {product.images?.map((img, index) => (
                 <button
                   key={index}
-                  className={`border ${index === currentImageIndex ? "border-blue-500" : "border-gray-300"} p-1`}
+                  className={`border ${
+                    index === currentImageIndex
+                      ? "border-blue-500"
+                      : "border-gray-300"
+                  } p-1`}
                   onClick={() => setCurrentImageIndex(index)}
                 >
                   <div className="relative h-20 w-full">
@@ -134,17 +175,6 @@ export default function ProductPage() {
         <div className="md:col-span-5">
           <h1 className="text-2xl font-bold mb-4">{product.name}</h1>
 
-          {/* Seller Info */}
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 bg-gray-200 rounded-sm"></div>
-            <div>
-              <div className="flex items-center gap-1">
-                <span>{product.user || "Unknown Seller"}</span>
-                <span className="text-gray-500">(271)</span>
-              </div>
-            </div>
-          </div>
-
           {/* Price */}
           <div className="mb-6">
             <div className="text-2xl font-bold">INR {product.price}</div>
@@ -155,13 +185,6 @@ export default function ProductPage() {
 
           <hr className="my-4" />
 
-          {/* Condition */}
-          <div className="flex items-center gap-2 mb-6">
-            <div className="font-medium">Condition:</div>
-            <div>{product.condition || "Not specified"}</div>
-            <Info className="h-4 w-4 text-gray-500" />
-          </div>
-
           {/* Action Buttons */}
           <div className="space-y-3">
             <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-full text-lg">
@@ -170,27 +193,51 @@ export default function ProductPage() {
             <button className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full">
               Add to cart
             </button>
-            <button className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full">
-              Make offer
+            <button
+              className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full"
+              onClick={() => setOfferModalOpen(true)}
+            >
+              Make Offer
             </button>
             <button className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full flex items-center justify-center">
               <Heart className="h-4 w-4 mr-2" />
               Add to Watchlist
             </button>
           </div>
-
-          {/* Shipping Info */}
-          <div className="mt-6 space-y-3">
-            <div className="flex flex-col sm:flex-row">
-              <div className="w-24 text-gray-600 mb-1 sm:mb-0">Delivery:</div>
-              <div className="text-sm">
-                Estimated between <strong>Tomorrow</strong> and{" "}
-                <strong>Monday</strong>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
+
+      {/* Offer Modal */}
+      {isOfferModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">Make an Offer</h2>
+              <button onClick={() => setOfferModalOpen(false)}>
+                <X className="h-6 w-6 text-gray-600" />
+              </button>
+            </div>
+
+            <label className="block mb-2 text-gray-700">
+              Your Offer Price:
+            </label>
+            <input
+              type="number"
+              value={offerPrice}
+              onChange={(e) => setOfferPrice(Number(e.target.value))}
+              className="w-full border p-2 rounded-lg mb-4"
+              placeholder="Enter your offer"
+            />
+
+            <button
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg"
+              onClick={handleSubmitOffer}
+            >
+              Submit Offer
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
