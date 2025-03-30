@@ -2,15 +2,18 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoMdCloseCircle } from "react-icons/io";
-import logo from "/logo1.png";
+import logo from "/logo copy.png";
 import { NavbarData } from "../lib/data";
 import { NavbarItems } from "../interfaces";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-const NavItem = ({ href, tags , closeNav }: NavbarItems) => {
+const NavItem = ({ href, tags, closeNav }: NavbarItems) => {
   return (
-    <li onClick={closeNav} className="hover:text-indigo-500 font-semibold text-lg gabarito-regular">
+    <li
+      onClick={closeNav}
+      className="hover:text-indigo-500 font-semibold text-lg gabarito-regular"
+    >
       <Link to={href}>{tags}</Link>
     </li>
   );
@@ -32,10 +35,8 @@ const Navbar = () => {
     <header className="shadow-lg flex justify-between items-center ">
       <nav className="flex justify-between items-center w-[80%] mx-auto my-[20px]">
         <Link to="/" className="z-20 flex items-center gap-1">
-          <img className="h-[55px] " src={logo} alt="Logo" />
-          <h2 className="text-2xl font-bold text-indigo-400 ubuntu-bold">
-            BID.
-          </h2>
+          <img className="h-[40px] w-auto" src={logo} alt="Logo" />
+          <h2 className="text-2xl font-bold text-indigo-400 ubuntu-bold">BID.</h2>
         </Link>
 
         <div className="sm:hidden">
@@ -61,12 +62,7 @@ const Navbar = () => {
           <ul className="flex flex-col gap-[30px]">
             {!state.user &&
               NavbarData.map(({ href, tags }: NavbarItems) => (
-                <NavItem
-                  closeNav={toogleMenu}
-                  key={href}
-                  href={href}
-                  tags={tags}
-                />
+                <NavItem closeNav={toogleMenu} key={href} href={href} tags={tags} />
               ))}
 
             {state.user && (
