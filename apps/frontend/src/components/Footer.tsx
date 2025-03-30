@@ -1,5 +1,5 @@
-import logo from "/logo1.png";
 import { Link } from "react-router-dom";
+import logo from "/logo1.png";
 function Footer() {
   return (
     <footer className="bg-white rounded-lg  m-4">
