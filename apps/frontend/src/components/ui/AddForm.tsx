@@ -163,7 +163,7 @@ export const AddForm: React.FC = () => {
 
   return (
     <form
-      className="w-full bg-white shadow-md p-6 rounded-lg"
+      className="w-full shadow-md p-6 rounded-2xl border border-gray-400"
     >
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Add New Product</h2>
 

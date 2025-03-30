@@ -10,7 +10,8 @@ const categories = [
 const Category: React.FC = () => {
   return (
     <div className="py-10">
-      <h2 className="text-4xl font-bold text-center mb-6">Our Categories</h2>
+      <div className="absolute circlePosition w-screen sm:w-[590px] h-[400px] bg-gradient-to-r from-indigo-400 rounded-[100%] top-[50%] left-[50%]  blur-[90px] translate-x-[-50%] translate-y-[-50%] z-[-1]" />
+      <h2 className="text-4xl font-bold text-center mb-6">Our <span className="text-blue-500">Categories</span></h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
         {categories.map((category) => (
           <div

@@ -41,14 +41,13 @@ const AddProducts = () => {
 
   return (
     <div className="w-[95%] mx-auto">
-      <div className="header my-3 h-12 px-10 flex items-center justify-between">
-        <h1 className="font-medium text-2xl">All Categories</h1>
-      </div>
+      <div className="absolute circlePosition w-screen sm:w-[590px] h-[400px] bg-gradient-to-r from-indigo-400 rounded-[100%] top-[80%] left-[50%]  blur-[90px] translate-x-[-50%] translate-y-[-50%] z-[-1]" />
+      <h1 className="font-bold my-10 text-4xl justify-center text-center">Your <span className="text-blue-600">Space</span></h1>
       <div className="flex flex-col mx-3 mt-6 lg:flex-row">
         <div className="w-full lg:w-1/3 m-1">
           <AddForm />
         </div>
-        <div className="w-full lg:w-2/3 m-1 bg-white shadow-lg text-lg rounded-sm border border-gray-200">
+        <div className="w-full lg:w-2/3 m-1  shadow-lg text-lg rounded-2xl border border-gray-400 ">
           <div className="overflow-x-auto rounded-lg p-3">
             <table className="table-auto w-full">
               <thead className="text-sm font-semibold uppercase text-gray-800 bg-gray-50">

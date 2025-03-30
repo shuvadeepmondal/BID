@@ -204,9 +204,10 @@ const OffersPage = () => {
   }
 
   return (
-    <div className="w-[95%] mx-auto">
-      <div className="header my-3 h-12 px-10 flex items-center justify-between">
-        <h1 className="font-medium text-2xl">My Offers</h1>
+    <div className="w-[95%] mx-auto mb-[20rem]">
+      <div className="absolute circlePosition w-screen sm:w-[590px] h-[400px] bg-gradient-to-r from-indigo-400 rounded-[100%] top-[70%] left-[50%]  blur-[90px] translate-x-[-50%] translate-y-[-50%] z-[-1]" />
+      <div className="header my-4 h-12 px-10 flex items-center justify-center">
+        <h1 className="font-bold text-3xl">My <span className="text-indigo-600">Offers</span></h1>
       </div>
 
       <OffersList
