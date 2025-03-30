@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   ChevronLeft,
   ChevronRight,
@@ -167,9 +167,11 @@ export default function ProductPage() {
             <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-full text-lg">
               Buy It Now
             </button>
-            <button className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full">
+            <Link to = "/mycard">
+            <button  className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full">
               Add to cart
             </button>
+            </Link>
             <button className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full">
               Make offer
             </button>
