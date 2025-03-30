@@ -1,84 +1,92 @@
-# Turborepo starter
+<a name="readme-top"></a>
 
-This Turborepo starter is maintained by the Turborepo core team.
+<br />
+<div align="center">
+  <a href="https://github.com/YourRepo/BID">
+    <img src="./docs/logo.png" alt="Logo" width="170" height="170">
+  </a>
 
-## Using this example
+  <h1 align="center">BID - Buy Interact Deal 🛒</h1> 
+ 
+  <p align="center">
+    Welcome to BID, a decentralized marketplace designed exclusively for university students. Buy, sell, and rent products securely within your campus!
+  </p>
 
-Run the following command:
+  <br />
+    <a href="https://github.com/YourRepo/BID"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://your-live-demo-link.com">View Demo</a>
+    ·
+    <a href="https://github.com/YourRepo/BID/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/YourRepo/BID/issues">Request Feature</a>
+</div>
 
-```sh
-npx create-turbo@latest
-```
+---
 
-## What's inside?
+## ⚙️ Installation
 
-This Turborepo includes the following packages/apps:
+## 🛠️ Prerequisites
 
-### Apps and Packages
+- [Node.js](https://nodejs.org/) installed on your machine 🟩
+- [Git](https://git-scm.com/) installed on your machine 🐙
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## 🛠️ Tech Stack
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+**BID is powered by cutting-edge technologies:**
 
-### Utilities
+<div align="center">
 
-This Turborepo has some additional tools already setup for you:
+### Frontend
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+<img src="https://skillicons.dev/icons?i=react,tailwindcss,typescript&theme=dark" />
 
-### Build
+### Backend
 
-To build all apps and packages, run the following command:
+<img src="https://skillicons.dev/icons?i=typescript,nodejs,express&theme=dark" />
 
-```
-cd my-turborepo
-pnpm build
-```
+### Database
 
-### Develop
+<img src="https://skillicons.dev/icons?i=mongodb&theme=dark" />
 
-To develop all apps and packages, run the following command:
+</div>
 
-```
-cd my-turborepo
-pnpm dev
-```
+---
 
-### Remote Caching
+## ❤️ Contributing
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+We welcome contributions to BID!
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+To get started, please check out the [CONTRIBUTING.md](./CONTRIBUTING.md) file for guidelines on how to contribute. Here are some key points:
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+- **Create a new branch from your fork for any changes you make.**
+- **Always contribute in the `dev` branch.**
+- **If you're adding new features, please add them inside the `apps` directory.**
+- **If you're working on the documentation, please edit the `docs` directory.**
 
-```
-cd my-turborepo
-npx turbo login
-```
+**_Note: If contributions do not follow the guidelines specified in the [CONTRIBUTING.md](./CONTRIBUTING.md), the pull request will not be accepted ❌._**
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+<h2 align = "center">Contributors of BID 🚀</h2>
+<div align = "center">
+<a href="https://github.com/YourRepo/BID/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=YourRepo/BID" />
+</a>
+</div>
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+---
 
-```
-npx turbo link
-```
+## 📬 Contact
 
-## Useful Links
+If you have any questions, feel free to open an issue or reach out to the project [maintainers](https://www.linkedin.com/in/your-profile/).
 
-Learn more about the power of Turborepo:
+- [Puskar roy](https://github.com/Puskar-Roy)  
+- [Debarshee mondal](https://github.com/debarshee2004)
+- [Shuvadeep mondal mondal](https://github.com/shuvadeepmondal)
+- [Pujan Sarkar](https://github.com/Pujan-sarkar)     
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+**Please ⭐ the repository to show some love!**
+
+<div align="right">
+  <a href="#readme-top">back to top</a>
+</div>
