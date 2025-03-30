@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import svg1 from "../assets/Buy.svg";
-import svg3 from "../assets/Deal.svg";
 import svg2 from "../assets/Interact.svg";
+import svg3 from "../assets/Deal.svg";
 
 const svgs = [svg1, svg2, svg3];
 

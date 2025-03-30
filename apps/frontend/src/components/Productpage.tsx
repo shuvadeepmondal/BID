@@ -191,7 +191,7 @@ const handleSubmitOffer = async () => {
               Buy It Now
             </button>
             <Link to = "/mycard">
-            <button  className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 rounded-full">
+            <button  className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 mt-3 rounded-full">
               Add to cart
             </button>
             </Link>

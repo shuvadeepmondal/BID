@@ -1,3 +1,11 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - apps/*
+  - packages/*
+ignoredBuiltDependencies:
+  - core-js-pure
+  - cpu-features
+  - esbuild
+  - keccak
+  - protobufjs
+  - secp256k1
+  - ssh2
