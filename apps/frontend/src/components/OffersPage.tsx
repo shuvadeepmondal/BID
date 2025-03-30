@@ -27,7 +27,7 @@ const OffersPage: React.FC = () => {
   console.log(offers);
   
   useEffect(() => {
-    fetch("http://localhost:5050/api/offers/my-offers", {
+    fetch(`${import.meta.env.VITE_API}/api/offers/my-offers`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.user?.token}`,
