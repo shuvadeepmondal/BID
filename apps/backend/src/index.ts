@@ -31,7 +31,7 @@ app.use(cors());
 app.use(express.json());
 app.use(helmet());
 app.use(mongoSanitize());
-app.use(morgan("combined"));
+//app.use(morgan("combined"));
 //app.set('trust proxy', true);
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import OfferRequest, { IOfferRequest } from "../models/OfferRequest";
 import Product from "../models/Product";
+import mongoose from "mongoose";
 
 
 export const createOffer = async (req: Request, res: Response) => {

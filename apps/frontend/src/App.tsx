@@ -15,6 +15,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import AddForm from "./components/ui/AddForm";
 import "./index.css";
 import TradingInterface from "./components/Trading-interface";
+import OfferWithId from "./components/OfferWithId";
 
 function App() {
   const { state } = useAuthContext();
@@ -40,6 +41,7 @@ function App() {
           <Route path="/my-space" element={<AddProducts />} />
 
           <Route path="/my-offers" element={<OffersPage />} />
+          <Route path="/my-offers/:id/:price/:name" element={<OfferWithId />} />
 
           <Route path="/market" element={<Market />} />
           <Route path="/add-item" element={<AddForm />} />

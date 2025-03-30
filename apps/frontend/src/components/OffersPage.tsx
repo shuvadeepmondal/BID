@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { Link } from "react-router-dom";
 
 interface Offer {
   _id: string;
@@ -123,9 +124,12 @@ const OffersPage: React.FC = () => {
               <div className="flex flex-col sm:flex-row justify-between">
                 <div className="mb-3 sm:mb-0">
                   <div className="flex items-center mb-1">
-                    <h3 className="text-lg font-medium text-gray-900 mr-3">
+                    <Link
+                      to={`/my-offers/${offer._id}/${offer.offeredPrice.toLocaleString()}/${encodeURIComponent(offer.product.name)}`}
+                      className="text-lg font-medium text-gray-900 mr-3"
+                    >
                       {offer.product.name}
-                    </h3>
+                    </Link>
                     {getStatusBadge(offer.status)}
                   </div>
                   {offer.product.category && (
