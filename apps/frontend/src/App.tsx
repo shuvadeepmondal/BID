@@ -12,6 +12,7 @@ import ProductPage from "./components/Productpage";
 import Cart from "./components/Cart";
 import Register from "./components/Register";
 import { useAuthContext } from "./hooks/useAuthContext";
+import AddForm from "./components/ui/AddForm";
 import "./index.css";
 import TradingInterface from "./components/Trading-interface";
 
@@ -41,12 +42,12 @@ function App() {
           <Route path="/my-offers" element={<OffersPage />} />
 
           <Route path="/market" element={<Market />} />
+          <Route path="/add-item" element={<AddForm />} />
 
           <Route path="/market/:id" element={<ProductPage />} />
           <Route path="/mycart" element={<Cart />} />
           <Route path="/lan" element={<LandingHero />} />
           <Route path="/trading-interface" element={<TradingInterface />} />
-
 
           {/* <Route
             path="/userprofile/:id"

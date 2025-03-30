@@ -164,7 +164,7 @@ export const AddForm: React.FC = () => {
   };
 
   return (
-    <form className="w-full max-w-4xl mx-auto bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
+    <form className="w-full max-w-4xl mx-auto bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden my-8">
       {/* Header */}
       <div className="bg-gradient-to-r from-indigo-600 to-indigo-800 px-6 py-4">
         <h2 className="text-2xl font-bold text-white">Add New Product</h2>
