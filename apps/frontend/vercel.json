@@ -13,15 +13,23 @@
       "dest": "/"
     },
     {
-      "src": "/viewAttendance",
+      "src": "/my-space",
       "dest": "/"
     },
     {
-      "src": "/usersAttendance/*",
+      "src": "/my-offers",
       "dest": "/"
     },
     {
-      "src": "/userprofile",
+      "src": "/market",
+      "dest": "/"
+    },
+    {
+      "src": "/market/*",
+      "dest": "/"
+    },
+    {
+      "src": "/trsding-interface",
       "dest": "/"
     },
     {
