@@ -142,7 +142,7 @@ function ItemCard({ item }: ItemCardProps) {
           {/* View details button */}
           <Link to={`/product/${item.id}`} className="block w-full">
             <button className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded flex items-center justify-center">
-              <span>View Details</span>
+              <span>Trade</span>
               <svg
                 className="w-4 h-4 ml-1"
                 fill="none"
@@ -241,7 +241,7 @@ const { state } = useAuthContext();
       </div>
       <div className="text-center mb-8 mt-10 z-10">
         <h1 className="text-4xl text-slate-800 font-semibold mb-2 ml-3">
-          Featured for You
+          Featuring Products
         </h1>
       </div>
       <main className="flex-1 bg-background py-8 px-6">
