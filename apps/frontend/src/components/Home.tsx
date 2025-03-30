@@ -11,7 +11,7 @@ const Home: React.FC = () => {
         <p className="text-gray-700 text-sm lg:text-lg mt-5">
           Shop and trade your products with your buddies
         </p>
-        <Link to="/explore">
+        <Link to="/market">
           <button
             className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full p-4 rounded-xl hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
             type="button"

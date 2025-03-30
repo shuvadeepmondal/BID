@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import OffersPage from "./components/OffersPage";
 import ProductPage from "./components/Productpage";
+import Cart from "./components/Cart";
 import Register from "./components/Register";
 import { useAuthContext } from "./hooks/useAuthContext";
 import "./index.css";
@@ -41,8 +42,9 @@ function App() {
           <Route path="/market" element={<Market />} />
 
           <Route path="/market/:id" element={<ProductPage />} />
-
+          <Route path="/mycart" element={<Cart />} />
           <Route path="/lan" element={<LandingHero />} />
+
 
           {/* <Route
             path="/userprofile/:id"
