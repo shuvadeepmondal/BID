@@ -31,6 +31,7 @@
     {
        "src" : "/trading-interface"
         "dest" : "/"
+    }
     
   ]
 }
